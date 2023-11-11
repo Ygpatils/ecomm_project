@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block 'main' %}
+
+<div class="row mt-4">
+    <div class="col-md-9">
+        {% for x in data %}
+        {% if forloop.counter == 1 %}
+        <h5 class="bg-danger text-white p-3">Customer Details</h5>
+        <p><strong>Name:</strong>&nbsp;&nbsp;&nbsp;&nbsp;A{{x.uid.username}}</p>
+        <!--<p><strong>Mobile:</strong>&nbsp;&nbsp;&nbsp;&nbsp;4534231212</p>-->
+        <p><strong>Email:</strong>&nbsp;&nbsp;&nbsp;&nbsp;{{x.uid.email}}</p>
+        {% endif %}
+        {% endfor %}
+        {% for x in data %}
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <img src="{{x.pid.pimage.url}}" width="100%" height="280px" alt="">
+            </div>
+            <div class="col-md-8">
+                <P><strong>Product Name:</strong>&nbsp;&nbsp;&nbsp;{{x.pid.name}}</P>
+                <P><strong>Product Price:</strong>&nbsp;&nbsp;&nbsp;Rs: {{x.pid.price}}</P>
+                {% if x.pid.cat == 1 %}
+                <P><strong>Category:</strong>&nbsp;&nbsp;&nbsp;Mobile</P>
+                {% elif x.pid.cat == 2 %}
+                <P><strong>Category:</strong>&nbsp;&nbsp;&nbsp;Shoes</P>
+                {% else %}
+                <P><strong>Category:</strong>&nbsp;&nbsp;&nbsp;Clothes</P>
+                {% endif %}
+                <P><strong>Product Detail:</strong>&nbsp;&nbsp;&nbsp;{{x.pid.pdetails}}</P>
+                
+                <a href="/remove/{{x.id}}"><button class="btn btn-danger">Remove</button></a>
+            </div>
+        </div>
+        {% endfor %} 
+    </div>
+    <!--customer and product detail-->
+    <div class="col-md-3">
+        <h5 class="bg-danger text-white p-3">Total Amount</h5>
+        <p><strong>Total({{n}} item)</strong>Rs: {{total}}</p>
+        <hr>
+        <p><strong>Total Amount</strong>Rs: {{total}}</p>
+        <a href="/makepayment"><button class="btn btn-danger">Make payment</button></a>
+    </div>
+    <!--total amount section-->
+</div>
+<!--Main end-->
+
+{% endblock 'main' %}

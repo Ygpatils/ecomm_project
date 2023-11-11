@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+<div class="row mt-5">
+    {% for x in products %}
+    <div class="col-md-6">
+        <img src="{{x.pimage.url}}" width="100%"  alt="">
+    </div>
+    <div class="col-md-6">
+        <P><strong>Product Name:</strong>&nbsp;&nbsp;&nbsp;{{x.name}}</P>
+        <P><strong>Price:</strong>&nbsp;&nbsp;&nbsp;Rs. {{x.price}}</P>
+        {% if x.cat == 1 %}
+        <P><strong>Category:</strong>&nbsp;&nbsp;&nbsp;Mobile</P>
+        {% elif x.cat == 2 %}
+        <P><strong>Category:</strong>&nbsp;&nbsp;&nbsp;Shoes</P>
+        {% else %}
+        <P><strong>Category:</strong>&nbsp;&nbsp;&nbsp;Clothes</P>
+        {% endif %}
+        <P><strong>Product Discription:</strong>&nbsp;&nbsp;&nbsp;{{x.pdetails}}</P>
+        <br>
+        <a href="/addtocart/{{x.id}}"><button class="btn btn-danger">Add to Cart</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="/viewcart"><button class="btn btn-danger">View Cart</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="/home"><button class="btn btn-danger">Shop More</button></a>
+        <br>
+        {% if success %}
+            <div class="alert alert-success">
+                {{success}}
+            </div>
+        {% endif %}
+
+        {% if msg %}
+            <div class="alert alert-danger">
+                {{msg}}
+            </div>
+        {% endif %}
+
+    </div>
+    {% endfor %}
+</div>
+{% endblock 'main' %}
